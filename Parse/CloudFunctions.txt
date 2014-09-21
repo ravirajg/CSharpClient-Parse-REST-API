@@ -1,0 +1,137 @@
+﻿Parse.Cloud.define("hello", function(request, response) {
+  response.success("Hello world!");
+});
+
+Parse.Cloud.define("getcountforpagination", function(request, response) {
+var query = new Parse.Query("TSLocation");
+var userGeoPoint = new Parse.GeoPoint(parseFloat(request.params.latitude),parseFloat(request.params.longitude));
+console.warn(request.params.latitude + "  " + request.params.longitude + " " + request.params.maxdistance);
+var tstr = request.params.acts;
+if(tstr != null)
+{
+	tstr = tstr.replace(/\s/g,"");
+	if(tstr != "")
+	{
+		tstr = tstr.replace("[","");
+		tstr = tstr.replace("]","");
+		tstr = tstr.replace(new RegExp('\r?\n','g'),"");
+		tstr = tstr.replace(/"/g,"");
+		var array = tstr.split(",");
+		//console.log("Activities changed>" + tstr + "<");
+		var qrys = new Array();
+		for(var i=0;i<array.length;i++)
+		{
+			var pointer = new Parse.Object("Activity");
+			pointer.id = array[i];
+			var tqry = new Parse.Query("TSLocation");
+			tqry.equalTo("offers", pointer);
+			qrys[i] = tqry;
+		}
+		query._orQuery(qrys);
+	}
+}
+query.limit=1000;
+query.withinMiles("location", userGeoPoint,parseFloat(request.params.maxdistance));
+query.find().then(function(results) {
+	 response.success(results.length);
+  }, function(error) {
+    response.error(error);
+  });
+});
+
+Parse.Cloud.define("keywordsearch", function(request, response) {
+var query = new Parse.Query("TSLocation");
+var queryval = request.params.kws;
+var finalvals = new Array();
+if ( (request.params.kws.indexOf(",") > 0) || (request.params.kws.indexOf(" ") > 0))
+{
+	if (request.params.kws.indexOf(",") > 0)
+	{
+		finalvals = request.params.kws.split(",");
+	}
+	if (request.params.kws.indexOf(" ") > 0)
+	{
+		var spacevals = request.params.kws.split(" ");
+		for (var i = 0, len = spacevals.length; i < len; ++i) {
+					finalvals.push(spacevals[i]);
+			};
+	}
+	queryval = finalvals[0];
+}
+query.limit=1000;
+query.contains("keywords", queryval);
+query.find().then(function(results) {
+	var actualresults = new Array();
+	if(finalvals.length > 1)
+	{
+		for(var j=0;j<results.length;j++)
+		{
+			var kw = results[j].get("keywords");
+			var flag = 0;
+			for(var k=0;k<finalvals.length;k++)
+			{
+				if(kw.indexOf(finalvals[k]) >= 0)
+					flag =1;
+				else
+					flag =0;
+			}
+			if(flag == 1)
+				actualresults.push(results[j]);
+		}
+		response.success(actualresults);
+	}
+	else
+		response.success(results);
+
+  }, function(error) {
+    response.error(error);
+  });
+});
+
+Parse.Cloud.define("ratingavg", function(request, response) {
+var query = new Parse.Query("Comment");
+result="";
+avg=0;
+query.equalTo("locationId", request.params.locid);
+query.find().then(function(results) {
+    //response.success(results);
+    var sum = 0;
+	for (var i = 0; i < results.length; ++i) {
+	  sum += results[i].get("rating");
+	}
+	avg = sum/results.length;
+	result = "Calculated average : " + avg + " " ;
+	//response.success(result);
+
+	var tslquery = new Parse.Query("TSLocation");
+	tslquery.get(request.params.locid, {
+	  success: function(tsl) {
+	    response.success(avg);//tsl.get("name"));
+	    tsl.set("overallRating",avg);
+	    tsl.set("commentCount", results.length);
+	    tsl.save();
+	  },
+	  error: function(object, error) {
+	    response.error("location error");
+  }});
+
+
+
+},function(error) {
+    response.error(result);
+  });
+
+
+});
+
+Parse.Cloud.define("testlocation",function(request,response) {
+var query = new Parse.Query("TSLocation");
+query.get(request.params.locid, {
+  success: function(tsl) {
+    response.success(tsl.get("name"));
+  },
+  error: function(object, error) {
+    response.error("location error");
+  }
+});
+});

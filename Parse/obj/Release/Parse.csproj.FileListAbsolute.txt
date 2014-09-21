@@ -1,0 +1,7 @@
+F:\vstudio\Thrillsports\Parse\bin\Release\Parse.dll
+F:\vstudio\Thrillsports\Parse\bin\Release\Parse.pdb
+F:\vstudio\Thrillsports\Parse\bin\Release\Newtonsoft.Json.dll
+F:\vstudio\Thrillsports\Parse\bin\Release\RestSharp.dll
+F:\vstudio\Thrillsports\Parse\obj\Release\Parse.csprojResolveAssemblyReference.cache
+F:\vstudio\Thrillsports\Parse\obj\Release\Parse.dll
+F:\vstudio\Thrillsports\Parse\obj\Release\Parse.pdb

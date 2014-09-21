@@ -1,0 +1,11 @@
+F:\vstudio\Github\Github\bin\Debug\Github.exe.config
+F:\vstudio\Github\Github\bin\Debug\Github.exe
+F:\vstudio\Github\Github\bin\Debug\Github.pdb
+F:\vstudio\Github\Github\bin\Debug\Parse.dll
+F:\vstudio\Github\Github\bin\Debug\Newtonsoft.Json.dll
+F:\vstudio\Github\Github\bin\Debug\RestSharp.dll
+F:\vstudio\Github\Github\bin\Debug\Parse.pdb
+F:\vstudio\Github\Github\obj\Debug\Github.csprojResolveAssemblyReference.cache
+F:\vstudio\Github\Github\obj\Debug\Github.exe
+F:\vstudio\Github\Github\obj\Debug\Github.pdb
+F:\vstudio\Github\Github\bin\Debug\Parse.xml

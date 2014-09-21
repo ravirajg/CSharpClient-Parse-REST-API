@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Parse</name>
+    </assembly>
+    <members>
+        <member name="T:Parse.ParsePointer">
+            <summary>
+            Parse data type for an object reference to a ParseObject
+            </summary>
+        </member>
+        <member name="T:Parse.Constraint">
+            <summary>
+            Constraints are used for constructing more precise queries. The property names follow those listed on the 
+            Parse REST API Constraints page, available at https://parse.com/docs/rest#queries-constraints. Usage can
+            be found in the main readme.md file of this repository.
+            </summary>
+        </member>
+        <member name="M:Parse.Constraint.#ctor(System.Object,System.Object,System.Object,System.Object,System.Object,System.Object,System.Object,System.Nullable{System.Boolean},System.Object,System.String,System.String)">
+            <summary>
+            Constructor containing all possible permutations of potential query arguments. Arguments can be set as needed. 
+            Arguments can also be set by using their property accessors if need be with no constructor arguments.
+            </summary>
+            <param name="lessThan">Used to find Parse objects that are less than the provided argument.</param>
+            <param name="lessThanOrEqualTo">Used to find Parse objects that are less than or equal to the provided argument.</param>
+            <param name="greaterThan">Used to find Parse objects that are greater than the provided argument.</param>
+            <param name="greaterThanOrEqualTo">Used to find Parse objects that are greater than or equal to the provided argument.</param>
+            <param name="notEqualTo">Used to find Parse objects that are not equal to the provided argument.</param>
+            <param name="in">Used to find Parse objects that contain a value in the provided list of arguments.</param>
+            <param name="notIn">Used to find Parse objects that do not contains values in the provided list of arguments.</param>
+            <param name="exists">Used to find Parse objects that have or do not have values for the specified property.</param>
+            <param name="select">Used to find Parse objects that are related to other objects.</param>
+            <param name="regex">Used to find Parse objects that match the provided Perl-based regex string.</param>
+            <param name="regexOptions">Options used to control how the regex property matches values.</param>
+        </member>
+        <member name="P:Parse.Constraint.LessThan">
+            <summary>
+            Used to find Parse objects that are less than the provided argument.
+            </summary>
+        </member>
+        <member name="P:Parse.Constraint.LessThanOrEqualTo">
+            <summary>
+            Used to find Parse objects that are less than or equal to the provided argument.
+            </summary>
+        </member>
+        <member name="P:Parse.Constraint.GreaterThan">
+            <summary>
+            Used to find Parse objects that are greater than the provided argument.
+            </summary>
+        </member>
+        <member name="P:Parse.Constraint.GreaterThanOrEqualTo">
+            <summary>
+            Used to find Parse objects that are greater than or equal to the provided argument.
+            </summary>
+        </member>
+        <member name="P:Parse.Constraint.NotEqualTo">
+            <summary>
+            Used to find Parse objects that are not equal to the provided argument.
+            </summary>
+        </member>
+        <member name="P:Parse.Constraint.In">
+            <summary>
+            Used to find Parse objects that contain a value in the provided list of arguments.
+            </summary>
+        </member>
+        <member name="P:Parse.Constraint.NotIn">
+            <summary>
+            Used to find Parse objects that do not contains values in the provided list of arguments.
+            </summary>
+        </member>
+        <member name="P:Parse.Constraint.Exists">
+            <summary>
+            Used to find Parse objects that have or do not have values for the specified property.
+            </summary>
+        </member>
+        <member name="P:Parse.Constraint.Select">
+            <summary>
+            Used to find Parse objects that are related to other objects.
+            </summary>
+        </member>
+        <member name="P:Parse.Constraint.Regex">
+            <summary>
+            Used to find Parse objects whose string value matches the provided Perl-based regex string.
+            </summary>
+        </member>
+        <member name="P:Parse.Constraint.RegexOptions">
+            <summary>
+            Options used to control how the regex property matches values. 
+            Possible values for this include 'i' for a case-insensitive 
+            search and 'm' to search through multiple lines of text. To 
+            use both options, simply concatenate them as 'im'.
+            </summary>
+        </member>
+        <member name="T:Parse.ParseClient">
+            <summary>
+            A REST API based client program for maintaining data in Parse database. 
+            </summary>
+        </member>
+        <member name="M:Parse.ParseClient.#ctor(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            ParseClient constructor
+            </summary>
+            <param name="appId"></param>
+            <param name="key"></param>
+            <param name="mk"></param>
+            <param name="timeout"></param>
+        </member>
+        <member name="M:Parse.ParseClient.CreateObject(Parse.ParseObject)">
+            <summary>
+            Creates a new ParseObject
+            </summary>
+            <param name="PostObject">The object to be created</param>
+            <returns>A ParseObject with the ObjectId and date of creation</returns>
+        </member>
+        <member name="M:Parse.ParseClient.CreateFile(Parse.ParseFile)">
+            <summary>
+            Upload file to Parse
+            </summary>
+            <param name="parseFile">The file to upload. Its Name and Url properties will be updated upon success.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Parse.ParseClient.DeleteFile(System.String)">
+            <summary>
+            Delete an existing Parse File
+            </summary>
+            <param name="parseFile">The file to be deleted</param>
+            <returns>returns true or false</returns>
+        </member>
+        <member name="M:Parse.ParseClient.UpdateObject(Parse.ParseObject)">
+            <summary>
+            Update an existing ParseObject
+            </summary>
+            <param name="PostObject">The object being updated</param>
+            <returns>void</returns>
+        </member>
+        <member name="M:Parse.ParseClient.GetObject(System.String,System.String)">
+            <summary>
+            Retrieve a Parseobject by an ID
+            </summary>
+            <param name="ClassName">The type of the object or class</param>
+            <param name="ObjectId">The ObjectId of the object</param>
+            <returns>A ParseObject with its attributes</returns>
+        </member>
+        <member name="M:Parse.ParseClient.GetObjectsWithQuery(System.String,System.Object,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Search for objects in Parse based on attributes. 
+            </summary>
+            <param name="ClassName">The name of the class being queried or the type</param>
+            <param name="Query">Various filter parameters</param>
+            <param name="Order">The name of the attribute used to order the results. Prefacing with '-' will reverse the results.</param>
+            <param name="Include">Names of Relationships separated by a comma eg: "type,in" . Would only work if the relationship columns are created with an "_op" type equal to either 
+            "Add" or "AddUnique". Would not work with "op" type equal to "AddRelation"</param>
+            <param name="Limit">The maximum number of results to be returned (Default unlimited)</param>
+            <param name="Skip">The number of results to skip at the start (Default 0)</param>
+            <returns>An array of ParseObjects  -- sometimes returned with their relationships as well if 'Include' parameter is passed in</returns>
+        </member>
+        <member name="M:Parse.ParseClient.DeleteObject(System.String,System.String)">
+            <summary>
+            Deletes an object from Parse
+            </summary>
+            <param name="type">The type or class of the object to be deleted</param>
+            <param name="id">The id of the object to be deleted</param>
+        </member>
+        <member name="M:Parse.ParseClient.GetFromParse(System.String,System.Object,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            This method is called by GetObjectWithId and GetObjectsWithQuery methods to retrieve one or more ParseObjects
+            </summary>
+            <param name="endpointUrl">The Parse end point url for classes</param>
+            <param name="queryObject">Query / filter object that was passed in</param>
+            <param name="includeObject">Relationships separated by comma</param>
+            <param name="Order"></param>
+            <param name="Limit"></param>
+            <param name="Skip"></param>
+            <returns>Response string from the webrequest that was executed</returns>
+        </member>
+        <member name="M:Parse.ParseClient.SendDataToParse(System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String)">
+            <summary>
+            This method is called by both Create / Update to create / update a ParseObject
+            </summary>
+            <param name="ClassName"></param>
+            <param name="PostObject"></param>
+            <param name="ObjectId"></param>
+            <returns>Response string from the webrequest that was executed</returns>
+        </member>
+        <member name="M:Parse.ParseClient.UploadFileToParse(System.String,System.String)">
+            <summary>
+            This method is used to upload a file to Parse
+            </summary>
+            <param name="filePath"></param>
+            <param name="contentType"></param>
+            <returns>Response string from the webrequest that was executed</returns>
+        </member>
+        <member name="M:Parse.ParseClient.DeleteFileFromParse(System.String)">
+            <summary>
+            This methoed is used to delete a file from Parse
+            </summary>
+            <param name="fileName"></param>
+            <returns>True or false</returns>
+        </member>
+        <member name="M:Parse.ParseClient.RelationOperation(Parse.ParseObject,System.Object)">
+            <summary>
+            This method is called by all the relation operations
+            </summary>
+            <param name="po"></param>
+            <param name="objs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Parse.ParseClient.AddRelation(Parse.ParseObject,Newtonsoft.Json.Linq.JObject,System.String)">
+            <summary>
+            This method is called to add an "_op" type of "AddRelation". AddRelation --> When you would like to add a relation in such a way that it could be lazy loaded while retrieving.
+            The pointer stored in this column is not readable but is clickable and takes you to a different table where the actual data is stored.
+            </summary>
+            <param name="po"></param>
+            <param name="jo"></param>
+            <param name="relationName"></param>
+            <returns>Returns the timestamp at which the object was updated</returns>
+        </member>
+        <member name="M:Parse.ParseClient.RemoveRelation(Parse.ParseObject,Newtonsoft.Json.Linq.JObject,System.String)">
+            <summary>
+            This method is called to remove a relation that was added by calling "AddRelation"
+            </summary>
+            <param name="po"></param>
+            <param name="jo"></param>
+            <param name="relationName"></param>
+            <returns>Returns the timestamp at which the object was updated</returns>
+        </member>
+        <member name="M:Parse.ParseClient.RemoveRelationArray(Parse.ParseObject,Newtonsoft.Json.Linq.JObject,System.String)">
+            <summary>
+            This method is called to remove a relation that was added by calling either "AddRelationLink" or "AddUniqueRelationArray"
+            </summary>
+            <param name="po"></param>
+            <param name="jo"></param>
+            <param name="relationName"></param>
+            <returns>Returns the timestamp at which the object was updated</returns>
+        </member>
+        <member name="M:Parse.ParseClient.AddRelationLink(Parse.ParseObject,Newtonsoft.Json.Linq.JObject,System.String)">
+            <summary>
+            This method is called to add an "_op" type of "Add". You store the data in this format if you want to extract the data "pointed to" by the pointer in this column as part of the initial 
+            retrieval itself. GetObjectswithQuery method has a parameter named "Include" and you could specify these kinds of relationships in that parameter to retrieve everything.
+            </summary>
+            <param name="po"></param>
+            <param name="jo"></param>
+            <param name="relationName"></param>
+            <returns>Returns the timestamp at which the object was updated</returns>
+        </member>
+        <member name="M:Parse.ParseClient.AddUniqueRelationArray(Parse.ParseObject,Newtonsoft.Json.Linq.JObject,System.String)">
+            <summary>
+            This method is called to add an "_op" type of "AddUnique". You store the data in this format if you want to extract the data "pointed to" by the pointer in this column as part of the initial 
+            retrieval itself. GetObjectswithQuery method has a parameter named "Include" and you could specify these kinds of relationships in that parameter to retrieve everything.
+            </summary>
+            <param name="po"></param>
+            <param name="jo"></param>
+            <param name="relationName"></param>
+            <returns>Returns the timestamp at which the object was updated</returns>
+        </member>
+        <member name="M:Parse.ParseClient.BatchOperation(System.Object)">
+            <summary>
+            This method is called for Batchoperations. eg:an add, update, adding any relations, delete etc. Any number of functions can be chained and executed in one single request. This
+            would hit Parse database only once and execute all operations one after another in a sequence. Currently executing a "cloud function" is not supported by Parse.
+            </summary>
+            <param name="objs"></param>
+            <returns>List of objects with success or error statuses set. Each operation returns a result object.</returns>
+        </member>
+        <member name="M:Parse.ParseClient.CloudFunction(System.String,System.String,Newtonsoft.Json.Linq.JArray)">
+            <summary>
+            This method is called to execute a cloud function that returns an array of ParseObjects
+            </summary>
+            <param name="name"></param>
+            <param name="ClassName"></param>
+            <param name="parameters"></param>
+            <returns>Returns an array of ParseObjects</returns>
+        </member>
+        <member name="M:Parse.ParseClient.CloudFunctionWithStringResult(System.String,System.String,Newtonsoft.Json.Linq.JArray)">
+            <summary>
+            This method is called to execute a cloud function that returns a string result
+            </summary>
+            <param name="name"></param>
+            <param name="ClassName"></param>
+            <param name="parameters"></param>
+            <returns>string</returns>
+        </member>
+        <member name="T:Parse.SerialisedDate">
+            <summary>
+            Provides an object to represent how Parse accepts DateTime objects on the server
+            </summary>
+            <remarks>
+            ParseObject has been subclassed to automatically transform a DateTime object into a SerialisedDate, however this conversion is one-way.
+            </remarks>
+        </member>
+        <member name="T:Parse.SerialisedObjectReference">
+            <summary>
+            Provides an object to represent a related object on Parse
+            </summary>
+        </member>
+        <member name="F:Parse.SerialisedObjectReference.__type">
+            <summary>
+            For serialisation only
+            </summary>
+        </member>
+        <member name="P:Parse.SerialisedObjectReference.className">
+            <summary>
+            The name of the related class
+            </summary>
+        </member>
+        <member name="P:Parse.SerialisedObjectReference.objectId">
+            <summary>
+            The ID of the related object
+            </summary>
+        </member>
+    </members>
+</doc>
