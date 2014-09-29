@@ -1,7 +1,7 @@
 CSharpClient-Parse-REST-API
 ===========================
 
-C# wrapper for Parse REST API. Supports most of the functionality including "batch operations" and executing "cloud functions".
+C# wrapper for Parse.com REST API. Supports most of the functionality including "batch operations" and executing "cloud functions".
 A sample project is also included in the solution which has the code samples on how to invoke the various methods on the 
 ParseClient.
 
@@ -16,6 +16,10 @@ Register for an account in Parse.com and get the Application Id, REST API Key, a
 Instantiate the ParseClient using those 3 keys.
 
 
+
+
+
+
 Create a New ParseObject:
 
 
@@ -28,6 +32,9 @@ public string CreateObject()
             return myObject.objectId;
         }
         
+
+
+
         
 Update and existing object:
 
